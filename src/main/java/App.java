@@ -45,6 +45,11 @@ public class App {
                     "<td>" +
                     car.getCountry() +
                     "</td>" +
+                    "<td>" +
+                    "<form action='/delete/"+car.getId()+"' >" +
+                    "<input type='submit' value='usun'/>" +
+                    "</form>" +
+                    "</td>" +
                     "</tr>";
         }
         out+="</tbody>\n" +
@@ -69,9 +74,12 @@ public class App {
     }
 
     private static String deleteCar(Request req, Response res, ArrayList<Car> cars) {
+//        System.out.println(cars);
         for(Car car : cars){
+//            System.out.println(car);
             if(car.getId()==Integer.parseInt(req.params("id"))){
                 cars.remove(car);
+                break;
             }
         }
         return "Car deleted";
